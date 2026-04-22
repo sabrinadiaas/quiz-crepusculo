@@ -18,19 +18,19 @@ class Personagem {
 const edward = new Personagem(
     "Edward Cullen", 
     "Você é misterioso, protetor e valoriza a lógica. Tem um gosto clássico e muitas vezes tenta carregar o peso do mundo nas costas.", 
-    "img\\edward-cullen.jpg"
+    "img/edward-cullen.jpg"
 );
 
 const bella = new Personagem(
     "Bella Swan", 
     "Você é observadora, empática e incrivelmente corajosa quando se trata de proteger quem ama. Tem uma força interior imensa.", 
-    "img\\bella-swan.jpg"
+    "img/bella-swan.jpg"
 );
 
 const jacob = new Personagem(
     "Jacob Black", 
     "Você é leal, caloroso e impulsivo. Adora estar ao ar livre, valoriza muito a amizade e tem um espírito livre e protetor.", 
-    "img\\jacob-black.jpg"
+    "img/jacob-black.jpg"
 );
 
 const personagens = [edward, bella, jacob];
@@ -101,3 +101,212 @@ const questionario = [
         new Opcao("Minha força física e o apoio da minha equipe/bando.", 1, 2, 3)
     ])
 ];
+
+let respostasUsuario = [];
+let perguntaAtual = 0;
+const totalPerguntas = 10;
+
+const telas = {
+    home: null,
+    quiz: null,
+    resultados: []
+};
+
+const inicializarTelas = () => {
+    telas.home = document.getElementById('home-screen');
+    
+    const todasQuizScreens = document.querySelectorAll('#quiz-screen');
+    telas.quiz = todasQuizScreens;
+    
+    telas.resultados = document.querySelectorAll('#result-screen');
+    
+    esconderTodasTelas();
+    if (telas.home) telas.home.style.display = 'block';
+};
+
+const esconderTodasTelas = () => {
+    if (telas.home) telas.home.style.display = 'none';
+    
+    telas.quiz.forEach(tela => {
+        if (tela) tela.style.display = 'none';
+    });
+    
+    telas.resultados.forEach(tela => {
+        if (tela) tela.style.display = 'none';
+    });
+};
+
+const mostrarPergunta = (indice) => {
+    esconderTodasTelas();
+    
+    if (telas.quiz[indice]) {
+        telas.quiz[indice].style.display = 'block';
+        perguntaAtual = indice;
+        
+        const titulo = telas.quiz[indice].querySelector('h2');
+        if (titulo) {
+            titulo.textContent = `Pergunta ${indice + 1}: ${questionario[indice].enunciado}`;
+        }
+    }
+};
+
+const coletarResposta = (indicePergunta) => {
+    const telaAtual = telas.quiz[indicePergunta];
+    if (!telaAtual) return null;
+    
+    const radios = telaAtual.querySelectorAll('input[type="radio"]');
+    let radioSelecionado = null;
+    
+    for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            radioSelecionado = radios[i];
+            break;
+        }
+    }
+    
+    if (!radioSelecionado) return null;
+    
+    return radioSelecionado.value;
+};
+
+const salvarResposta = (indicePergunta, valorResposta) => {
+    const letraParaIndice = { 'A': 0, 'B': 1, 'C': 2 };
+    const indiceOpcao = letraParaIndice[valorResposta];
+    const pergunta = questionario[indicePergunta];
+    const opcao = pergunta.opcoes[indiceOpcao];
+    
+    if (opcao) {
+        edward.adicionarPontos(opcao.pontos[0]);
+        bella.adicionarPontos(opcao.pontos[1]);
+        jacob.adicionarPontos(opcao.pontos[2]);
+    }
+};
+
+const calcularVencedor = () => {
+    let maiorPontuacao = -1;
+    let vencedor = null;
+    let pontuacoes = {
+        edward: edward.pontuacao,
+        bella: bella.pontuacao,
+        jacob: jacob.pontuacao
+    };
+    
+    if (edward.pontuacao > maiorPontuacao) {
+        maiorPontuacao = edward.pontuacao;
+        vencedor = 'edward';
+    }
+    if (bella.pontuacao > maiorPontuacao) {
+        maiorPontuacao = bella.pontuacao;
+        vencedor = 'bella';
+    }
+    if (jacob.pontuacao > maiorPontuacao) {
+        maiorPontuacao = jacob.pontuacao;
+        vencedor = 'jacob';
+    }
+    
+    return { vencedor, pontuacoes };
+};
+
+const mostrarResultado = () => {
+    const { vencedor, pontuacoes } = calcularVencedor();
+    
+    esconderTodasTelas();
+    
+    let indiceResultado = 0;
+    if (vencedor === 'edward') indiceResultado = 1;
+    else if (vencedor === 'jacob') indiceResultado = 2;
+    
+    const telaResultado = telas.resultados[indiceResultado];
+    if (telaResultado) {
+        telaResultado.style.display = 'block';
+        
+        const spanPontos = telaResultado.querySelector('span');
+        if (spanPontos) {
+            spanPontos.textContent = pontuacoes[vencedor];
+        }
+        
+        const tituloPersonagem = telaResultado.querySelector('h1');
+        if (tituloPersonagem && vencedor === 'edward') tituloPersonagem.textContent = "Edward Cullen";
+        if (tituloPersonagem && vencedor === 'bella') tituloPersonagem.textContent = "Bella Swan";
+        if (tituloPersonagem && vencedor === 'jacob') tituloPersonagem.textContent = "Jacob Black";
+    }
+};
+
+const avancarParaProximaPergunta = () => {
+    const resposta = coletarResposta(perguntaAtual);
+    
+    if (!resposta) {
+        alert('Por favor, selecione uma opção antes de continuar!');
+        return false;
+    }
+    
+    salvarResposta(perguntaAtual, resposta);
+    
+    if (perguntaAtual + 1 < totalPerguntas) {
+        mostrarPergunta(perguntaAtual + 1);
+    } else {
+        mostrarResultado();
+    }
+    
+    return true;
+};
+
+const reiniciarJogo = () => {
+    respostasUsuario = [];
+    perguntaAtual = 0;
+    
+    edward.zerarPontuacao();
+    bella.zerarPontuacao();
+    jacob.zerarPontuacao();
+    
+    telas.quiz.forEach(tela => {
+        const radios = tela.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+        });
+    });
+    
+    esconderTodasTelas();
+    if (telas.home) telas.home.style.display = 'block';
+};
+
+const configurarEventos = () => {
+    const botaoIniciar = document.querySelector('#home-screen button');
+    if (botaoIniciar) {
+        const novoBotao = botaoIniciar.cloneNode(true);
+        botaoIniciar.parentNode.replaceChild(novoBotao, botaoIniciar);
+        novoBotao.addEventListener('click', () => {
+            reiniciarJogo();
+            mostrarPergunta(0);
+        });
+    }
+    
+    telas.quiz.forEach((tela, indice) => {
+        const radios = tela.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            const novoRadio = radio.cloneNode(true);
+            radio.parentNode.replaceChild(novoRadio, radio);
+            novoRadio.addEventListener('change', () => {
+                if (indice === perguntaAtual) {
+                    avancarParaProximaPergunta();
+                }
+            });
+        });
+    });
+    
+    telas.resultados.forEach(tela => {
+        const botaoTentar = tela.querySelector('button');
+        if (botaoTentar) {
+            const novoBotao = botaoTentar.cloneNode(true);
+            botaoTentar.parentNode.replaceChild(novoBotao, botaoTentar);
+            novoBotao.addEventListener('click', reiniciarJogo);
+        }
+    });
+};
+
+const initQuiz = () => {
+    inicializarTelas();
+    configurarEventos();
+};
+
+window.addEventListener('DOMContentLoaded', initQuiz);
