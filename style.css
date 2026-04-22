@@ -1,0 +1,38 @@
+@import url('ttps://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+    font-family: 'Twilight';
+    src: url('assets/fonts/twilight/twilight New Moon.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --cor-primaria: #9faca5;
+    --cor-secundaria: #4c6c6b;
+    --cor-destaque: #304d2f;
+    --cor-sombra: #0e1911;
+    --fonte-titulo: 'Twilight', sans-serif;
+    --fonte-principal: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
