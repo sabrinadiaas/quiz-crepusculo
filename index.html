@@ -1,39 +1,50 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz Crepúsculo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Crepúsculo | Qual personagem você é?</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="home-screen">
-        <h1>Bem-vindo(a) ao Quiz: Quem você seria em Crepúsculo?</h1>
-        <p>A Saga Crepúsculo é uma série de fantasia romântica focada no romance sobrenatural entre a adolescente Bella
+
+    <main class="container">
+        <section id="home-screen" class="card">
+            <h1>Quem você seria em Crepúsculo?</h1>
+            <div class="intro-text">
+                <p>A Saga Crepúsculo é uma série de fantasia romântica focada no romance sobrenatural entre a adolescente Bella
             Swan e o vampiro Edward Cullen. Baseada nos livros de Stephenie Meyer, a saga narra a adaptação de Bella à
             vida na chuvosa cidade de Forks e sua introdução ao mundo secreto dos vampiros e lobisomens.</p>
-        <p>Responda 10 perguntas e descubra qual personagem da Saga Crepúsculo você seria!</p>
-        <button type="button" id="botaoinciar" onclick="iniciarJogo()">Iniciar Quiz</button>
-    </div>
+                <p>Responda 10 perguntas e descubra qual personagem da Saga Crepúsculo você seria!</p>
+            </div>
+            <button type="button" id="botaoinciar">Iniciar Quiz</button>
+        </section>
 
-    <div id="quiz-screen" class="hidden">
-        
-        <h2 id="enunciado-pergunta"></h2>
+        <section id="quiz-screen" class="card hidden">
+            <h2 id="enunciado-pergunta">Carregando pergunta...</h2>
 
-        <form id="quiz-form">
-            <div id="container-opcoes"></div>
-        </form>
+            <form id="quiz-form">
+                <div id="container-opcoes">
+                    </div>
+            </form>
 
-        <button type="button" id="botaoproximo" onclick="proximaPergunta()">Próxima Pergunta</button>
-    </div>
+            <button type="button" id="botaoproximo">Próxima Pergunta</button>
+        </section>
 
-    <div id="resultado-screen" class="hidden">
-        <h2>Você seria: <span id="nome-personagem"></span></h2>
-        <img id="foto-personagem" src="" alt="Foto do Personagem">
-        <p id="descricao-personagem"></p>
-        <button onclick="location.reload()">Refazer Quiz</button>
-    </div>
+        <section id="resultado-screen" class="card hidden">
+            <header>
+                <h2>Seu resultado: <span id="nome-personagem"></span></h2>
+            </header>
+            
+            <div class="result-content">
+                <img id="foto-personagem" src="" alt="Foto do Personagem">
+                <p id="descricao-personagem"></p>
+            </div>
+            
+            <button type="button" id="btn-reiniciar">Refazer Quiz</button>
+        </section>
+    </main>
 
-   <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>
