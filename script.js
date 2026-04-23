@@ -32,19 +32,19 @@ class Pergunta {
 const edward = new Personagem(
     "Edward Cullen", 
     "Você é misterioso, protetor e valoriza a lógica. Tem um gosto clássico e muitas vezes tenta carregar o peso do mundo nas costas.", 
-    "img/edward-cullen.jpg"
+    "assets/img/edward-cullen.jpg"
 );
 
 const bella = new Personagem(
     "Bella Swan", 
     "Você é observadora, empática e incrivelmente corajosa quando se trata de proteger quem ama. Tem uma força interior imensa.", 
-    "img/bella-swan.jpg"
+    "assets/img/bella-swan.jpg"
 );
 
 const jacob = new Personagem(
     "Jacob Black", 
     "Você é leal, caloroso e impulsivo. Adora estar ao ar livre, valoriza muito a amizade e tem um espírito livre e protetor.", 
-    "img/jacob-black.jpg"
+    "assets/img/jacob-black.jpg"
 );
 
 const personagens = [edward, bella, jacob];
