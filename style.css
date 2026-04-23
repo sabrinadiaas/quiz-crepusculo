@@ -13,12 +13,12 @@
 }
 
 :root {
-    --cor-primaria: #9faca5;
+    --cor-primaria: #9fa4ac;
     --cor-secundaria: #4c6c6b;
-    --cor-destaque: #304d2f;
-    --cor-sombra: #0e1911;
-    --fonte-titulo: 'Twilight', sans-serif;
-    --fonte-principal: 'Roboto', sans-serif;
+    --cor-destaque: #2f424d;
+    --cor-sombra: #0e1119;
+    --fonte-titulo: 'Twilight', 'Georgia', serif;
+    --fonte-principal: 'Roboto', 'Verdana', sans-serif;
 }
 
 * {
@@ -29,10 +29,13 @@
 
 body {
     font-family: var(--fonte-principal);
-    font-weight: 400;
-    background-color: var(--cor-primaria);
+    font-weight: normal;
+    background-color: var(--cor-sombra);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3Cstyle%3E .lua { fill: %239faca5; opacity: 0.15; } .estrela { fill: %239faca5; opacity: 0.25; } %3C/style%3E%3C/defs%3E%3Ccircle class='lua' cx='30' cy='40' r='18'/%3E%3Ccircle class='lua' cx='170' cy='80' r='12'/%3E%3Ccircle class='lua' cx='50' cy='160' r='22'/%3E%3Ccircle class='lua' cx='140' cy='170' r='10'/%3E%3Ccircle class='lua' cx='100' cy='20' r='8'/%3E%3Ccircle class='lua' cx='180' cy='140' r='14'/%3E%3Ccircle class='estrela' cx='10' cy='10' r='2'/%3E%3Ccircle class='estrela' cx='80' cy='15' r='1.5'/%3E%3Ccircle class='estrela' cx='120' cy='45' r='2.5'/%3E%3Ccircle class='estrela' cx='160' cy='25' r='1.8'/%3E%3Ccircle class='estrela' cx='190' cy='55' r='2'/%3E%3Ccircle class='estrela' cx='25' cy='90' r='1.5'/%3E%3Ccircle class='estrela' cx='75' cy='100' r='2'/%3E%3Ccircle class='estrela' cx='130' cy='110' r='1.2'/%3E%3Ccircle class='estrela' cx='45' cy='130' r='2.2'/%3E%3Ccircle class='estrela' cx='110' cy='150' r='1.8'/%3E%3Ccircle class='estrela' cx='155' cy='190' r='2'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
     color: var(--cor-secundaria);
-    line-height: 1.5;
+    line-height: 1.4;
     padding: 1rem;
     min-height: 100vh;
     display: flex;
@@ -43,20 +46,21 @@ body {
 
 h1 {
     font-family: var(--fonte-titulo);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-align: center;
-    color: var(--cor-destaque);
     font-size: 1.8rem;
+    text-align: center;
+    color: var(--cor-primaria);
+    letter-spacing: 2px;
     margin-bottom: 1rem;
+    text-shadow: 2px 2px 0 var(--cor-sombra);
 }
 
 h2 {
     font-family: var(--fonte-principal);
-    font-weight: 600;
     font-size: 1.3rem;
+    font-weight: bold;
     margin-bottom: 1rem;
-    border-left: 4px solid var(--cor-destaque);
+    color: var(--cor-primaria);
+    border-left: 5px solid var(--cor-destaque);
     padding-left: 0.75rem;
 }
 
